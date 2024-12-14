@@ -1,254 +1,289 @@
 <!DOCTYPE html>
 <html lang="id">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Todos</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <style>
-      body {
-        font-family: "Poppins", sans-serif;
-      }
-      .navbar {
-        background-color: #f8f9fa;
-      }
-      .navbar-brand {
-        font-weight: 600;
-      }
-      .navbar-nav .nav-link {
-        color: #555 !important;
-      }
-      .navbar-nav .nav-link:hover {
-        color: #007bff !important;
-      }
-      .container {
-        max-width: 960px;
-      }
-      .card {
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-      }
-      .card:hover {
-        transform: scale(1.05);
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-      }
-      .modal-content {
-        border-radius: 10px;
-      }
-      .btn-primary {
-        background-color: #007bff;
-        border-color: #007bff;
-      }
-      .btn-primary:hover {
-        background-color: #0056b3;
-        border-color: #0056b3;
-      }
-    </style>
-  </head>
+        body {
+            font-family: "Poppins", sans-serif;
+            background: url('https://i.pinimg.com/736x/78/19/e6/7819e60bd44f606520a166b2c4ca9828.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #ecf0f1;
+        }
 
-  <body>
-    <nav class="navbar navbar-expand-lg navbar-light">
-      <a class="navbar-brand" href="<%= url %>">Todos</a>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="<%= url %>">Home</a>
-          </li>
-        </ul>
-      </div>
+        .navbar {
+            background-color: #2c3e50;
+        }
+
+        .navbar-brand {
+            font-weight: 600;
+            color: #ecf0f1;
+        }
+
+        .navbar-nav .nav-link {
+            color: #bdc3c7 !important;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #3498db !important;
+        }
+
+        .container {
+            max-width: 960px;
+        }
+
+        .card {
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-radius: 15px;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-body {
+            background-color: rgba(44, 93, 143, 0.7);
+            color: #ecf0f1;
+        }
+
+        .modal-content {
+            border-radius: 10px;
+        }
+
+        .btn-primary {
+            background-color: #3498db;
+            border-color: #3498db;
+        }
+
+        .btn-primary:hover {
+            background-color: #2980b9;
+            border-color: #2980b9;
+        }
+
+        footer {
+            background-color: #2c3e50;
+            color: #bdc3c7;
+            text-align: center;
+            padding: 10px;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        .modal-header {
+            background-color: #2980b9;
+            color: #fff;
+        }
+
+        .modal-footer {
+            background-color: #2c3e50;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="<%= url %>">AhmadFalah</a>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="<%= url %>">Home</a>
+                </li>
+            </ul>
+        </div>
     </nav>
 
     <div class="container mt-5">
-      <h1 class="text-center mb-4">Todos List</h1>
+        <h1 class="text-center mb-4">Daftar Todos</h1>
 
-      <div class="text-center mb-4">
-        <button
-          type="button"
-          class="btn btn-primary"
-          data-bs-toggle="modal"
-          data-bs-target="#addTodoModal"
-        >
-          Tambah Todo
-        </button>
-      </div>
-
-      <div class="row">
-        <% if (todos.length > 0) { %>
-          <% todos.forEach(todo => { %>
-            <div class="col-md-4 mb-3">
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title"><%= todo.name %></h5>
-                  <p class="card-text">
-                    <strong>Jenis:</strong> <%= todo.jenis %><br />
-                    <strong>Harga:</strong> Rp<%= todo.harga.toLocaleString() %>
-                  </p>
-                  <div class="d-flex justify-content-between">
-                    <button
-                      class="btn btn-warning btn-sm"
-                      data-bs-toggle="modal"
-                      data-bs-target="#editTodoModal<%= todo.id %>"
-                    >
-                      Edit
-                    </button>
-                    <a
-                      href="<%= url + 'todos/delete/' + todo.id %>"
-                      class="btn btn-danger btn-sm"
-                      onclick="return confirm('Yakin ingin menghapus data ini?')"
-                    >
-                      Hapus
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Modal Edit Data -->
-            <div
-              class="modal fade"
-              id="editTodoModal<%= todo.id %>"
-              tabindex="-1"
-              aria-labelledby="editTodoLabel"
-              aria-hidden="true"
+        <div class="text-center mb-4">
+            <button
+                type="button"
+                class="btn btn-primary"
+                data-bs-toggle="modal"
+                data-bs-target="#addTodoModal"
             >
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title">Edit Todo</h5>
-                    <button
-                      type="button"
-                      class="btn-close"
-                      data-bs-dismiss="modal"
-                      aria-label="Close"
-                    ></button>
-                  </div>
-                  <form
-                    action="<%= url + 'todos/update/' + todo.id %>"
-                    method="POST"
-                  >
-                    <div class="modal-body">
-                      <div class="form-group">
-                        <label for="name">Nama</label>
-                        <input
-                          type="text"
-                          class="form-control"
-                          id="name"
-                          name="name"
-                          value="<%= todo.name %>"
-                          required
-                        />
-                      </div>
-                      <div class="form-group mt-3">
-                        <label for="jenis">Jenis</label>
-                        <input
-                          type="text"
-                          class="form-control"
-                          id="jenis"
-                          name="jenis"
-                          value="<%= todo.jenis %>"
-                          required
-                        />
-                      </div>
-                      <div class="form-group mt-3">
-                        <label for="harga">Harga</label>
-                        <input
-                          type="number"
-                          class="form-control"
-                          id="harga"
-                          name="harga"
-                          value="<%= todo.harga %>"
-                          required
-                        />
-                      </div>
+                Tambah Todo
+            </button>
+        </div>
+
+        <div class="row">
+            <% if (todos.length > 0) { %>
+                <% todos.forEach(todo => { %>
+                    <div class="col-md-4 mb-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title"><%= todo.name %></h5>
+                                <p class="card-text">
+                                    <strong>Jenis:</strong> <%= todo.jenis %><br />
+                                    <strong>Harga:</strong> Rp<%= todo.harga.toLocaleString() %>
+                                </p>
+                                <div class="d-flex justify-content-between">
+                                    <button
+                                        class="btn btn-warning btn-sm"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#editTodoModal<%= todo.id %>"
+                                    >
+                                        Edit
+                                    </button>
+                                    <a
+                                        href="<%= url + 'todos/delete/' + todo.id %>"
+                                        class="btn btn-danger btn-sm"
+                                        onclick="return confirm('Yakin ingin menghapus data ini?')"
+                                    >
+                                        Hapus
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="modal-footer">
-                      <button type="submit" class="btn btn-primary">Simpan</button>
+
+                    <!-- Modal Edit Data -->
+                    <div
+                        class="modal fade"
+                        id="editTodoModal<%= todo.id %>"
+                        tabindex="-1"
+                        aria-labelledby="editTodoLabel"
+                        aria-hidden="true"
+                    >
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Edit Todo</h5>
+                                    <button
+                                        type="button"
+                                        class="btn-close"
+                                        data-bs-dismiss="modal"
+                                        aria-label="Close"
+                                    ></button>
+                                </div>
+                                <form
+                                    action="<%= url + 'todos/update/' + todo.id %>"
+                                    method="POST"
+                                >
+                                    <div class="modal-body">
+                                        <div class="form-group">
+                                            <label for="name">Nama</label>
+                                            <input
+                                                type="text"
+                                                class="form-control"
+                                                id="name"
+                                                name="name"
+                                                value="<%= todo.name %>"
+                                                required
+                                            />
+                                        </div>
+                                        <div class="form-group mt-3">
+                                            <label for="jenis">Jenis</label>
+                                            <input
+                                                type="text"
+                                                class="form-control"
+                                                id="jenis"
+                                                name="jenis"
+                                                value="<%= todo.jenis %>"
+                                                required
+                                            />
+                                        </div>
+                                        <div class="form-group mt-3">
+                                            <label for="harga">Harga</label>
+                                            <input
+                                                type="number"
+                                                class="form-control"
+                                                id="harga"
+                                                name="harga"
+                                                value="<%= todo.harga %>"
+                                                required
+                                            />
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-primary">Simpan</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
                     </div>
-                  </form>
-                </div>
-              </div>
-            </div>
-          <% }); %>
-        <% } else { %>
-          <p class="text-center">Tidak ada data</p>
-        <% } %>
-      </div>
+                <% }); %>
+            <% } else { %>
+                <p class="text-center">Tidak ada data</p>
+            <% } %>
+        </div>
     </div>
 
     <!-- Modal Tambah Data -->
     <div
-      class="modal fade"
-      id="addTodoModal"
-      tabindex="-1"
-      aria-labelledby="addTodoLabel"
-      aria-hidden="true"
+        class="modal fade"
+        id="addTodoModal"
+        tabindex="-1"
+        aria-labelledby="addTodoLabel"
+        aria-hidden="true"
     >
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Tambah Todo</h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <form action="<%= url + 'todos/save' %>" method="POST">
-            <div class="modal-body">
-              <div class="form-group">
-                <label for="name">Nama</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="name"
-                  name="name"
-                  placeholder="Masukkan nama"
-                  required
-                />
-              </div>
-              <div class="form-group mt-3">
-                <label for="jenis">Jenis</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="jenis"
-                  name="jenis"
-                  placeholder="Masukkan jenis"
-                  required
-                />
-              </div>
-              <div class="form-group mt-3">
-                <label for="harga">Harga</label>
-                <input
-                  type="number"
-                  class="form-control"
-                  id="harga"
-                  name="harga"
-                  placeholder="Masukkan harga"
-                  required
-                />
-              </div>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Tambah Todo</h5>
+                    <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                    ></button>
+                </div>
+                <form action="<%= url + 'todos/save' %>" method="POST">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="name">Nama</label>
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="name"
+                                name="name"
+                                placeholder="Masukkan nama"
+                                required
+                            />
+                        </div>
+                        <div class="form-group mt-3">
+                            <label for="jenis">Jenis</label>
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="jenis"
+                                name="jenis"
+                                placeholder="Masukkan jenis"
+                                required
+                            />
+                        </div>
+                        <div class="form-group mt-3">
+                            <label for="harga">Harga</label>
+                            <input
+                                type="number"
+                                class="form-control"
+                                id="harga"
+                                name="harga"
+                                placeholder="Masukkan harga"
+                                required
+                            />
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                    </div>
+                </form>
             </div>
-            <div class="modal-footer">
-              <button type="submit" class="btn btn-primary">Simpan</button>
-            </div>
-          </form>
         </div>
-      </div>
     </div>
 
+    <footer>
+        <p>&copy; 2024 Ahmad Falah. All Rights Reserved.</p>
+    </footer>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-  </body>
+</body>
 </html>
