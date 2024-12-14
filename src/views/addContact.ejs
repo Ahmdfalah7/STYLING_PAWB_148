@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Tambah Kontak</title>
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
+        
+    </head>
+
+    <body>
+        <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
+            <a class="navbar-brand" href="<%= url %>">Priboen</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="<%= url %>">Home</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="<%= url %>profile">Profile</a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="<%= url %>profile">Profil</a>
+                            <a class="dropdown-item" href="<%= url %>login/logout">Logout</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <section class="mt-4 pb-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h1 class="text-center mb-4">Tambah Data Kontak</h1>
+                                <form method="POST" action="/contact/save">
+                                    <div class="form-group">
+                                        <label for="name">Nama :</label>
+                                        <input type="text" class="form-control" name="name" id="name" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email">Email :</label>
+                                        <input type="email" class="form-control" name="email" id="email" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="phone">Nomor Telephone :</label>
+                                        <input type="number" class="form-control" name="phone" id="phone" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="address">Alamat :</label>
+                                        <textarea class="form-control" name="address" id="address" required></textarea>
+                                    </div>
+                                    <div class="text-center">
+                                        <button type="submit" class="btn btn-primary">Kirim</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3"></div>
+                </div>
+
+            </div>
+        </section>
+    </body>
+
+    <style>
+        /* Custom CSS for Add Contact Page */
+        body {
+            background-color: #f5f5f5; /* Light gray background */
+            font-family: 'Arial', sans-serif; /* Font family */
+        }
+
+        .navbar {
+            background-color: #2c3e50; /* Dark blue background for navbar */
+        }
+
+        .navbar-brand {
+            font-size: 24px; /* Font size for navbar brand */
+        }
+
+        .navbar-nav .nav-link {
+            font-size: 18px; /* Font size for navbar links */
+        }
+
+        .navbar-nav .nav-item.active .nav-link {
+            color: #3498db; /* Active link color */
+        }
+
+        .card {
+            border-radius: 15px; /* Rounded corners for card */
+            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+            margin: 20px; /* Margin for card */
+        }
+
+        .card-body {
+            background-color: rgba(44, 93, 143, 0.7); /* Semi-transparent background for card body */
+            color: #ecf0f1; /* Text color */
+            padding: 20px; /* Padding for card body */
+        }
+
+        .form-group {
+            margin-bottom: 20px; /* Margin bottom for form group */
+        }
+
+        .form-control {
+            border-radius: 20px; /* Rounded corners for form control */
+        }
+
+        .form-control:disabled {
+            background-color: #e9ecef; /* Disabled input background color */
+        }
+
+        /* Additional styling for layout and card */
+        .container {
+            max-width: 800px; /* Max width for container */
+            margin: auto; /* Center container */
+        }
+
+        .row {
+            justify-content: center; /* Center content horizontally */
+        }
+
+        .col-md-6 {
+            padding: 20px; /* Padding for column */
+        }
+    </style>
+</html>
